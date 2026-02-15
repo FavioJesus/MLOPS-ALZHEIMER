@@ -58,7 +58,7 @@ async def predict(file: UploadFile = File(...)):
         raise HTTPException(415, "Solo JPG/PNG/WebP")
     data = await file.read()
     x = preprocess(data)
-    preds = model.predict(x)  # ya sale PROBABILIDADES porque la última capa es softmax
+    preds = model.predict(x)  
     probs = preds[0].tolist()
     top = int(np.argmax(probs))
     return JSONResponse({
